@@ -66,7 +66,7 @@ export const montagem = [
   },
   {
     nome: 'piramide-base-quadrada',
-    label: 'pirâmede de base quadrada',
+    label: 'pirâmide de base quadrada',
     index: 1,
     imgCompleta: 'piramide-basequadrada-inteiro',
     imgMetade: 'metade-piramidebasequad',

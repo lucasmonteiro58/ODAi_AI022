@@ -8,7 +8,9 @@
           :name="'reiniciar'"
         ></Button>
       </span>
-      <Button :color="'#6c6c6c'" :name="'ajuda'"></Button>
+      <span @click="openHelp">
+        <Button :color="'#6c6c6c'" :name="'ajuda'"></Button>
+      </span>
       <div draggable="false" class="titulo-box"></div>
       <Button
         :color="'#6c6c6c'"
@@ -21,6 +23,7 @@
         <SelectedObject
           :image="actualMontagem.imgCompleta"
           :name="actualMontagem.label"
+          :class="help0Class"
         ></SelectedObject>
         <span
           v-for="el in montagemFiltered"
@@ -34,9 +37,13 @@
           ></ListObjects>
         </span>
       </div>
-      <div class="center-content">
-        <div class="title">MOSTRE QUE FORMAS FALTAM PARA MONTAR UM(A):</div>
-        <div class="actual-el">{{ actualMontagem.label }}</div>
+      <div class="center-content ">
+        <div class="title" :class="help1Class">
+          MOSTRE QUE FORMAS FALTAM PARA MONTAR UM(A):
+        </div>
+        <div class="actual-el" :class="help1Class">
+          {{ actualMontagem.label }}
+        </div>
         <div class="stage">
           <div
             v-if="!showMontado"
@@ -45,7 +52,7 @@
               top: actualMontagem.imgPosition.y,
               marginLeft: actualMontagem.imgPosition.x
             }"
-            :class="actualMontagem.imgMetade"
+            :class="[actualMontagem.imgMetade, help1Class]"
           ></div>
           <div
             v-else
@@ -71,7 +78,7 @@
               is-big
             ></Button>
           </span>
-          <span @click="montarClick">
+          <span :class="help2Class" @click="montarClick">
             <Button :imagem="'icon-montar'" :name="'Montar'" is-big></Button>
           </span>
         </div>
@@ -90,12 +97,18 @@
           @click="expandShapes"
         ></div>
         <transition name="no-fade">
-          <div v-if="showShapes" class="el-container">
+          <div v-if="showShapes" class="el-container" :class="help1Class">
             <div v-for="el in shapes" :key="el.name" class="el-item">
-              <div v-for="x in repetition" :key="x" class="el-repetition">
+              <div
+                v-for="x in repetition"
+                :key="x"
+                class="el-repetition"
+                :class="help1Class"
+              >
                 <Drag
                   :id="'ID-' + el.name"
                   class="shape"
+                  :class="help1Class"
                   :data-transfer="el.name"
                   :img-name="el.name"
                   :img-src="el.path"
@@ -105,6 +118,7 @@
             </div>
           </div>
         </transition>
+        <div class="prevent-arrastar" :class="help1Class"></div>
         <transition name="slide-fade">
           <div
             v-if="isExpandShapes"
@@ -129,6 +143,13 @@
       @close="closePopUp"
       @closewrong="closePopUpWrong"
     ></PopUp>
+    <Help
+      v-if="showHelp"
+      :index="indexHelp"
+      @closeHelp="closeHelp"
+      @prevHelp="prevHelp"
+      @nextHelp="nextHelp"
+    ></Help>
   </section>
 </template>
 <script>
@@ -148,7 +169,9 @@ export default {
       popUpImage: '',
       textCorrect:
         '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR O(A) <b>#actual</b>. QUE TAL MONTAR O(A) <b>#next</b>?',
-      nextMontagem: []
+      nextMontagem: [],
+      showHelp: false,
+      indexHelp: 0
     }
   },
   computed: {
@@ -173,11 +196,26 @@ export default {
         temp = temp.replace('#next', next.label)
         return temp
       } else {
-        return '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR O(A) <b>#actual</b> E CONCLUIU A ATIVIDADE. QUER REINCIAR?'.replace(
+        return '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR O(A) <b>#actual</b> E CONCLUIU A ATIVIDADE. QUER REINICIAR?'.replace(
           '#actual',
           actual.label
         )
       }
+    },
+    help0Class() {
+      if (this.showHelp && this.indexHelp === 0) {
+        return 'help-0-class'
+      } else return ''
+    },
+    help1Class() {
+      if (this.showHelp && this.indexHelp === 1) {
+        return 'help-1-class'
+      } else return ''
+    },
+    help2Class() {
+      if (this.showHelp && this.indexHelp === 2) {
+        return 'help-2-class'
+      } else return ''
     }
   },
   mounted() {
@@ -187,6 +225,25 @@ export default {
   methods: {
     expandShapes() {
       this.isExpandShapes = true
+    },
+    closeHelp() {
+      this.showHelp = false
+      this.indexHelp = 0
+    },
+    openHelp() {
+      this.showHelp = true
+    },
+    prevHelp() {
+      if (this.indexHelp > 0) {
+        this.indexHelp--
+      }
+    },
+    nextHelp() {
+      if (this.indexHelp < 2) {
+        this.indexHelp++
+      } else {
+        this.closeHelp()
+      }
     },
     contratShapes() {
       this.isExpandShapes = false
@@ -282,6 +339,32 @@ export default {
   flex-direction: column;
   align-items: center;
   position: relative;
+}
+
+.prevent-arrastar {
+  z-index: 10000;
+  width: 92px;
+  height: 590px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: none;
+}
+
+.help-0-class {
+  z-index: 1001;
+  background-color: white;
+}
+
+.help-1-class {
+  z-index: 1001;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+}
+
+.help-2-class {
+  z-index: 1001;
+  pointer-events: none;
 }
 
 .top {
