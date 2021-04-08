@@ -7,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'ODAi-AI022',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=1440, user-scalable=yes' },
