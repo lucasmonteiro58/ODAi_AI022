@@ -1,0 +1,169 @@
+/*******************
+ Box Sizing
+ *******************/
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/****************************
+ Generic Margins and Paddings
+ ****************************/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+p,
+pre,
+blockquote,
+figure,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+/*******************
+ Lists
+ *******************/
+ul {
+  list-style: none;
+}
+
+/*******************
+ Forms and buttons
+ *******************/
+input,
+textarea,
+select,
+button {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+/* I usually expand input and textarea to full-width */
+input[type='text'],
+textarea {
+  width: 100%;
+}
+
+/* More friendly border */
+input,
+textarea,
+button {
+  border: none;
+}
+
+/* Some defaults for one-liner buttons */
+button {
+  padding: 0.75em 1em;
+  border-radius: 0;
+  line-height: 1;
+  cursor: pointer;
+}
+
+button * {
+  pointer-events: none;
+}
+
+/***********************************
+ Easy responsive for media elements
+ ***********************************/
+svg,
+iframe,
+video,
+object,
+embed {
+  display: block;
+  max-width: 100%;
+}
+
+/*******************
+ Useful table styles
+ *******************/
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/*******************
+ The hidden attribute
+ *******************/
+[hidden] {
+  display: none !important;
+}
+
+/*******************
+ Noscript
+ *******************/
+noscript {
+  display: block;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+button:focus {
+  outline: 0;
+}
+
+@font-face {
+  font-family: MavenPro;
+  src: url('../fonts/MavenPro.ttf');
+}
+
+@font-face {
+  font-family: MavenProBlack;
+  src: url('../fonts/MavenPro-Black.ttf');
+}
+
+@font-face {
+  font-family: MavenProBold;
+  src: url('../fonts/MavenPro-Bold.ttf');
+}
+
+@font-face {
+  font-family: MavenProRegular;
+  src: url('../fonts/MavenPro-Regular.ttf');
+}
+
+@font-face {
+  font-family: MavenProMedium;
+  src: url('../fonts/MavenPro-Medium.ttf');
+}
+
+@font-face {
+  font-family: MavenProBoldSemiBold;
+  src: url('../fonts/MavenPro-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: MavenProBoldSemiBold;
+  src: url('../fonts/MavenPro-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: MavenProBoldExtraBold;
+  src: url('../fonts/MavenPro-ExtraBold.ttf');
+}
+
+* {
+  font-family: MavenProBold;
+  color: #6c6c6c;
+  text-transform: uppercase;
+}
+
+b {
+  font-family: MavenProBlack;
+  color: #007ec4;
+}
