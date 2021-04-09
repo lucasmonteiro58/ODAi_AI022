@@ -39,7 +39,7 @@
       </div>
       <div class="center-content ">
         <div class="title" :class="help1Class">
-          MOSTRE QUE FORMAS FALTAM PARA MONTAR UM(A):
+          MOSTRE QUE FORMAS FALTAM PARA MONTAR {{ actualMontagem.quantidade }}:
         </div>
         <div class="actual-el" :class="help1Class">
           {{ actualMontagem.label }}
@@ -174,7 +174,7 @@ export default {
       popUpText: '',
       popUpImage: '',
       textCorrect:
-        '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR O(A) <b>#actual</b>. QUE TAL MONTAR O(A) <b>#next</b>?',
+        '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR #actual. QUE TAL MONTAR #next?',
       nextMontagem: [],
       showHelp: false,
       indexHelp: 0
@@ -198,13 +198,20 @@ export default {
       const actual = this.actualMontagem
       const next = this.nextMontagem
       if (next) {
-        let temp = this.textCorrect.replace('#actual', actual.label)
-        temp = temp.replace('#next', next.label)
+        let temp = this.textCorrect.replace(
+          '#actual',
+          actual.artigo + ' <b>' + actual.label + '</b>'
+        )
+        temp = temp.replace('#next', next.artigo + ' <b>' + next.label + '</b>')
         return temp
       } else {
-        return '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR O(A) <b>#actual</b> E CONCLUIU A ATIVIDADE. QUER REINICIAR?'.replace(
-          '#actual',
-          actual.label
+        return (
+          '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR ' +
+          actual.artigo +
+          ' <b>#actual</b> E CONCLUIU A ATIVIDADE. QUER REINICIAR?'.replace(
+            '#actual',
+            actual.label
+          )
         )
       }
     },

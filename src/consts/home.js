@@ -47,6 +47,8 @@ export const montagem = [
   {
     nome: 'cubo',
     label: 'cubo',
+    artigo: 'o',
+    quantidade: 'um',
     index: 0,
     imgCompleta: 'cubo-inteiro',
     imgMetade: 'metade-cubo',
@@ -67,6 +69,8 @@ export const montagem = [
   {
     nome: 'piramide-base-quadrada',
     label: 'pirâmide de base quadrada',
+    artigo: 'a',
+    quantidade: 'uma',
     index: 1,
     imgCompleta: 'piramide-basequadrada-inteiro',
     imgMetade: 'metade-piramidebasequad',
@@ -87,6 +91,8 @@ export const montagem = [
   {
     nome: 'cilindro',
     label: 'cilindro',
+    artigo: 'o',
+    quantidade: 'um',
     index: 2,
     imgCompleta: 'cilindro-inteiro',
     imgMetade: 'metade-cilindro',
@@ -106,6 +112,8 @@ export const montagem = [
   },
   {
     nome: 'piramide-base-hexagonal',
+    artigo: 'a',
+    quantidade: 'uma',
     label: 'pirâmide de base hexagonal',
     index: 3,
     imgCompleta: 'piramide-basehexagonal-inteiro',
@@ -131,6 +139,8 @@ export const montagem = [
   {
     nome: 'prisma-base-pentagonal',
     label: 'prisma de base pentagonal',
+    artigo: 'a',
+    quantidade: 'uma',
     index: 4,
     imgCompleta: 'prisma-basepentagonal-inteiro',
     imgMetade: 'metade-prismabasepenta',
