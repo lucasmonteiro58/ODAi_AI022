@@ -150,15 +150,14 @@
       @prevHelp="prevHelp"
       @nextHelp="nextHelp"
     ></Help>
-    <audio ref="success" src="../assets/audios/success.wav" preload></audio>
-    <audio ref="error" src="../assets/audios/error.wav" preload></audio>
-    <audio ref="click" src="../assets/audios/click.wav" preload></audio>
-    <audio ref="apagar" src="../assets/audios/apagar.wav" preload></audio>
   </section>
 </template>
 <script>
 import { shapes, montagem } from '../consts/home'
+import audios from '../mixins/audios'
+
 export default {
+  mixins: [audios],
   data() {
     return {
       shapes,
@@ -229,27 +228,27 @@ export default {
   methods: {
     expandShapes() {
       this.isExpandShapes = true
-      this.$refs.click.play()
+      this.audioClick.play()
     },
     closeHelp() {
       this.showHelp = false
       this.indexHelp = 0
-      this.$refs.click.play()
+      this.audioClick.play()
     },
     openHelp() {
       this.showHelp = true
-      this.$refs.click.play()
+      this.audioClick.play()
     },
     prevHelp() {
       if (this.indexHelp > 0) {
         this.indexHelp--
-        this.$refs.click.play()
+        this.audioClick.play()
       }
     },
     nextHelp() {
       if (this.indexHelp < 2) {
         this.indexHelp++
-        this.$refs.click.play()
+        this.audioClick.play()
       } else {
         this.closeHelp()
       }
@@ -258,7 +257,6 @@ export default {
       this.isExpandShapes = false
     },
     restart() {
-      this.$refs.click.play()
       this.index = 0
       this.deleteAll()
       // eslint-disable-next-line array-callback-return
@@ -277,9 +275,9 @@ export default {
       })
 
       if (selectedElements.length > 0) {
-        this.$refs.apagar.play()
+        this.audioApagar.play()
       } else {
-        this.$refs.click.play()
+        this.audioClick.play()
       }
 
       this.showShapes = false
@@ -288,7 +286,7 @@ export default {
       }, 10)
     },
     closePopUp() {
-      this.$refs.click.play()
+      this.audioClick.play()
       this.showPopUp = false
       this.showMontado = false
 
@@ -300,13 +298,12 @@ export default {
       }
     },
     closePopUpWrong() {
-      this.$refs.click.play()
+      this.audioClick.play()
       this.showPopUp = false
       this.showMontado = false
     },
     montarClick() {
       const selectedElements = []
-
       ;[...document.getElementsByClassName('can-drop')].forEach((el) => {
         selectedElements.push(el.getAttribute('data-transfer'))
       })
@@ -320,14 +317,14 @@ export default {
           this.popUpText = this.textCorretoPopUp
           this.popUpImage = 'medalha'
           this.showPopUp = true
-          this.$refs.success.play()
+          this.audioSuccess.play()
         }, 1500)
       } else {
         this.popUpText =
           'A planificação ainda não está correta. Que tal tentar de novo?'
         this.popUpImage = ''
         this.showPopUp = true
-        this.$refs.error.play()
+        this.audioError.play()
       }
     },
     getNextMontagem() {

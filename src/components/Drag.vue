@@ -21,17 +21,16 @@
         class="btn-apagar-forma icon-apagarforma"
         @click="resetPosition"
       ></div>
-      <audio ref="apagar" src="../assets/audios/apagar.wav" preload></audio>
-      <audio ref="encaixar" src="../assets/audios/encaixe.wav" preload></audio>
-      <audio ref="click" src="../assets/audios/click.wav" preload></audio>
     </div>
   </div>
 </template>
 <script>
 import interact from 'interactjs'
 import { shapes } from '../consts/home'
+import audios from '../mixins/audios'
 
 export default {
+  mixins: [audios],
   props: {
     dataTransfer: {
       type: [Object, String],
@@ -120,10 +119,10 @@ export default {
   methods: {
     rotate() {
       this.angulo = this.angulo + 30
-      this.$refs.click.play()
+      this.audioClick.play()
     },
     resetPosition() {
-      this.$refs.apagar.play()
+      this.audioApagar.play()
       const target = this.$refs.elDrag
       target.style.transform = `translate(0px, 0px)`
       target.setAttribute('data-x', 0)
@@ -170,7 +169,7 @@ export default {
       target.classList.add('start-drag')
     },
     onEnd(event) {
-      this.$refs.encaixar.play()
+      this.audioEncaixar.play()
       const target = event.target
       target.classList.remove('start-drag')
       if (target.classList.contains('can-drop')) {
