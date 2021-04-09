@@ -176,7 +176,7 @@ export default {
       textCorrect:
         '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR #actual. QUE TAL MONTAR #next?',
       nextMontagem: [],
-      showHelp: false,
+      showHelp: true,
       indexHelp: 0
     }
   },
