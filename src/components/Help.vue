@@ -17,7 +17,6 @@
       <div class="text">{{ index + 1 + ' de 3' }}</div>
       <div class="btn" :class="classBotaoPass" @click="nextClick"></div>
     </div>
-    <div class="prevent-arrastar"></div>
   </div>
 </template>
 

@@ -44,7 +44,7 @@
         <div class="actual-el" :class="help1Class">
           {{ actualMontagem.label }}
         </div>
-        <div class="stage">
+        <div class="stage" :class="help1Class + 'z-stage'">
           <div
             v-if="!showMontado"
             class="stage-imagem-metade"
@@ -385,6 +385,12 @@ export default {
   z-index: 1001;
   color: rgba(255, 255, 255, 0.7);
   display: block;
+}
+
+.help-1-classz-stage {
+  z-index: 1002;
+  pointer-events: none !important;
+  cursor: initial;
 }
 
 .help-2-class {
