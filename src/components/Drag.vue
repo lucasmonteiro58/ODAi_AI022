@@ -204,6 +204,7 @@ export default {
   display: none;
   position: absolute;
   cursor: pointer;
+  transform: scale(0.9);
 }
 
 .drag-wrap {
@@ -228,7 +229,7 @@ export default {
 
     .button-rotate {
       display: block;
-      filter: brightness(200%);
+      opacity: 0.28;
       transform: scale(0.8);
       position: absolute;
       top: -8px;
