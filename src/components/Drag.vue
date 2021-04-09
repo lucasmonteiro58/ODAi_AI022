@@ -15,11 +15,11 @@
       <div
         v-if="showButtonRotate"
         class="button-rotate icon-reiniciar"
-        @click="rotate"
+        @click.prevent="rotate"
       ></div>
       <div
         class="btn-apagar-forma icon-apagarforma"
-        @click="resetPosition"
+        @click.prevent="resetPosition"
       ></div>
     </div>
   </div>

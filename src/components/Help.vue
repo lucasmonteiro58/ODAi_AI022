@@ -1,7 +1,7 @@
 <template>
   <div class="help-container">
     <div class="backdrop"></div>
-    <div class="fechar-tutorial" @click="closeHelp">
+    <div class="fechar-tutorial" @click.prevent="closeHelp">
       <p>Fechar Tutorial</p>
       <div class="icon-fechar"></div>
     </div>
@@ -12,10 +12,10 @@
       <div
         class="btn icon-prev"
         :class="{ disable: index === 0 }"
-        @click="prevClick"
+        @click.prevent="prevClick"
       ></div>
       <div class="text">{{ index + 1 + ' de 3' }}</div>
-      <div class="btn" :class="classBotaoPass" @click="nextClick"></div>
+      <div class="btn" :class="classBotaoPass" @click.prevent="nextClick"></div>
     </div>
   </div>
 </template>

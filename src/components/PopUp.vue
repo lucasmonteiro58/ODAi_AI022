@@ -1,23 +1,23 @@
 <template>
   <div v-if="image" class="pop-up">
-    <div class="backdrop" @click="close"></div>
+    <div class="backdrop" @click.prevent="close"></div>
     <div class="content">
       <div class="content-center">
         <div v-if="image" class="image" :class="image"></div>
         <div class="text-certo" v-html="text"></div>
       </div>
-      <button class="btn-certo" @click="close">Vamos lá</button>
-      <div class="btn-close icon-fechar" @click="close"></div>
+      <button class="btn-certo" @click.prevent="close">Vamos lá</button>
+      <div class="btn-close icon-fechar" @click.prevent="close"></div>
     </div>
   </div>
   <div v-else class="pop-up">
-    <div class="backdrop" @click="closeWrong"></div>
+    <div class="backdrop" @click.prevent="closeWrong"></div>
     <div class="content">
       <div class="content-center">
         <div class="text" v-html="text"></div>
       </div>
-      <button @click="closeWrong">Vamos lá</button>
-      <div class="btn-close icon-fechar" @click="closeWrong"></div>
+      <button @click.prevent="closeWrong">Vamos lá</button>
+      <div class="btn-close icon-fechar" @click.prevent="closeWrong"></div>
     </div>
   </div>
 </template>

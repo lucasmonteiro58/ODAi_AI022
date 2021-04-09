@@ -1,14 +1,14 @@
 <template>
   <section class="hero">
     <div class="top">
-      <span @click="restart">
+      <span @click.prevent="restart">
         <Button
           :color="'#6c6c6c'"
           :imagem="'icon-reiniciar'"
           :name="'reiniciar'"
         ></Button>
       </span>
-      <span @click="openHelp">
+      <span @click.prevent="openHelp">
         <Button :color="'#6c6c6c'" :name="'ajuda'"></Button>
       </span>
       <div draggable="false" class="titulo-box"></div>
@@ -28,7 +28,7 @@
         <span
           v-for="el in montagemFiltered"
           :key="el.nome"
-          @click="changeEl(el)"
+          @click.prevent="changeEl(el)"
         >
           <ListObjects
             :image="el.imgCompleta"
@@ -70,7 +70,7 @@
           ></Drop>
         </div>
         <div class="buttons-section">
-          <span @click="deleteAll">
+          <span @click.prevent="deleteAll">
             <Button
               :color="'#6c6c6c'"
               :imagem="'icon-apagartudo'"
@@ -78,7 +78,7 @@
               is-big
             ></Button>
           </span>
-          <span :class="help2Class" @click="montarClick">
+          <span :class="help2Class" @click.prevent="montarClick">
             <Button :imagem="'icon-montar'" :name="'Montar'" is-big></Button>
           </span>
         </div>
@@ -88,13 +88,13 @@
           v-if="isExpandShapes"
           class="icon-contrair"
           :class="[expandShapeClass, 'icon-contrair']"
-          @click="contratShapes"
+          @click.prevent="contratShapes"
         ></div>
         <div
           v-else
           class="icon-contrair"
           :class="[expandShapeClass, 'icon-expandir']"
-          @click="expandShapes"
+          @click.prevent="expandShapes"
         ></div>
         <transition name="no-fade">
           <div v-if="showShapes" class="el-container" :class="help1Class">
@@ -126,7 +126,7 @@
           <div
             v-if="isExpandShapes"
             class="el-container-expand"
-            @click="contratShapes"
+            @click.prevent="contratShapes"
             @mouseleave="contratShapes"
           >
             <div v-for="el in shapes" :key="el.name" class="el-item">
@@ -177,7 +177,8 @@ export default {
         '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR #actual. QUE TAL MONTAR #next?',
       nextMontagem: [],
       showHelp: true,
-      indexHelp: 0
+      indexHelp: 0,
+      preventClick: true
     }
   },
   computed: {
@@ -313,28 +314,32 @@ export default {
       this.showMontado = false
     },
     montarClick() {
-      const selectedElements = []
-      ;[...document.getElementsByClassName('can-drop')].forEach((el) => {
-        selectedElements.push(el.getAttribute('data-transfer'))
-      })
+      if (this.preventClick) {
+        const selectedElements = []
+        ;[...document.getElementsByClassName('can-drop')].forEach((el) => {
+          selectedElements.push(el.getAttribute('data-transfer'))
+        })
 
-      if (this.arraysEqual(this.actualMontagem.pecasName, selectedElements)) {
-        this.deleteAll()
-        this.showMontado = true
-        this.marcarComoCompleto()
-        this.getNextMontagem()
-        setTimeout(() => {
-          this.popUpText = this.textCorretoPopUp
-          this.popUpImage = 'medalha'
+        if (this.arraysEqual(this.actualMontagem.pecasName, selectedElements)) {
+          this.preventClick = false
+          this.deleteAll()
+          this.showMontado = true
+          this.marcarComoCompleto()
+          this.getNextMontagem()
+          setTimeout(() => {
+            this.popUpText = this.textCorretoPopUp
+            this.popUpImage = 'medalha'
+            this.showPopUp = true
+            this.audioSuccess.play()
+            this.preventClick = true
+          }, 1500)
+        } else {
+          this.popUpText =
+            'A planificação ainda não está correta. Que tal tentar de novo?'
+          this.popUpImage = ''
           this.showPopUp = true
-          this.audioSuccess.play()
-        }, 1500)
-      } else {
-        this.popUpText =
-          'A planificação ainda não está correta. Que tal tentar de novo?'
-        this.popUpImage = ''
-        this.showPopUp = true
-        this.audioError.play()
+          this.audioError.play()
+        }
       }
     },
     getNextMontagem() {
