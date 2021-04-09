@@ -27,10 +27,8 @@
 <script>
 import interact from 'interactjs'
 import { shapes } from '../consts/home'
-import audios from '../mixins/audios'
 
 export default {
-  mixins: [audios],
   props: {
     dataTransfer: {
       type: [Object, String],
@@ -119,10 +117,10 @@ export default {
   methods: {
     rotate() {
       this.angulo = this.angulo + 30
-      this.audioClick.play()
+      this.$emit('audioclick')
     },
     resetPosition() {
-      this.audioApagar.play()
+      this.$emit('audioapagar')
       const target = this.$refs.elDrag
       target.style.transform = `translate(0px, 0px)`
       target.setAttribute('data-x', 0)
@@ -169,7 +167,7 @@ export default {
       target.classList.add('start-drag')
     },
     onEnd(event) {
-      this.audioEncaixar.play()
+      this.$emit('audioencaixar')
       const target = event.target
       target.classList.remove('start-drag')
       if (target.classList.contains('can-drop')) {

@@ -112,6 +112,9 @@
                   :data-transfer="el.name"
                   :img-name="el.name"
                   :img-src="el.path"
+                  @audioclick="audioClick.play()"
+                  @audioencaixar="audioEncaixar.play()"
+                  @audioapagar="audioApagar.play()"
                 >
                 </Drag>
               </div>
