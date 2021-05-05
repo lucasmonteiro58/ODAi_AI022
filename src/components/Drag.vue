@@ -154,8 +154,13 @@ export default {
       const deltaX = event.dx
       const deltaY = event.dy
 
-      const newX = initialX + deltaX
-      const newY = initialY + deltaY
+      // width height fixed
+      const widthRatio = window.innerWidth / 980
+      const heightRatio = window.innerHeight / 720
+      const min = Math.min(widthRatio, heightRatio)
+
+      const newX = initialX + deltaX / min
+      const newY = initialY + deltaY / min
 
       target.style.transform = `translate(${newX}px, ${newY}px)`
 
