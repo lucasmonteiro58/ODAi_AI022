@@ -12,11 +12,13 @@
         <Button :color="'#6c6c6c'" :name="'ajuda'"></Button>
       </span>
       <div draggable="false" class="titulo-box"></div>
-      <Button
-        :color="'#6c6c6c'"
-        :imagem="'icon-creditos'"
-        :name="'créditos'"
-      ></Button>
+      <span @click.prevent="openCreditos">
+        <Button
+          :color="'#6c6c6c'"
+          :imagem="'icon-creditos'"
+          :name="'créditos'"
+        ></Button>
+      </span>
     </div>
     <div class="bottom">
       <div class="left-content">
@@ -153,6 +155,10 @@
       @prevHelp="prevHelp"
       @nextHelp="nextHelp"
     ></Help>
+    <PopUpCreditos
+      v-if="showPopUpCreditos"
+      @close="closeCreditos"
+    ></PopUpCreditos>
   </section>
 </template>
 <script>
@@ -168,6 +174,7 @@ export default {
       isExpandShapes: false,
       repetition: ['a', 'b', 'c', 'd'],
       showPopUp: false,
+      showPopUpCreditos: false,
       index: 0,
       showShapes: true,
       showMontado: false,
@@ -244,6 +251,14 @@ export default {
     closeHelp() {
       this.showHelp = false
       this.indexHelp = 0
+      this.audioClick.play()
+    },
+    closeCreditos() {
+      this.showPopUpCreditos = false
+      this.audioClick.play()
+    },
+    openCreditos() {
+      this.showPopUpCreditos = true
       this.audioClick.play()
     },
     openHelp() {
