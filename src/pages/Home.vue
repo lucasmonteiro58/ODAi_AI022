@@ -145,6 +145,7 @@
       v-if="showPopUp"
       :text="popUpText"
       :image="popUpImage"
+      :is-last="nextMontagem"
       @close="closePopUp"
       @closewrong="closePopUpWrong"
     ></PopUp>
@@ -216,7 +217,7 @@ export default {
         return (
           '<b>MUITO BEM!</b></br>VOCÊ CONSEGUIU MONTAR ' +
           actual.artigo +
-          ' <b>#actual</b> E CONCLUIU A ATIVIDADE. QUER REINICIAR?'.replace(
+          ' <b>#actual</b> E CONCLUIU A ATIVIDADE!'.replace(
             '#actual',
             actual.label
           )
@@ -319,7 +320,6 @@ export default {
       if (this.nextMontagem) {
         this.index = this.nextMontagem.index
       } else {
-        this.restart()
         console.log('reiniciar')
       }
     },

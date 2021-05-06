@@ -19,7 +19,7 @@ export const shapes = [
   },
   {
     name: 'triangulo-isosceles',
-    label: 'triângulo isósceles',
+    label: 'triângulo',
     path: 'triangulo-isosceles-pequeno',
     pathBig: 'triangulo-isosceles-grande'
   },
@@ -139,8 +139,8 @@ export const montagem = [
   {
     nome: 'prisma-base-pentagonal',
     label: 'prisma de base pentagonal',
-    artigo: 'a',
-    quantidade: 'uma',
+    artigo: 'o',
+    quantidade: 'um',
     index: 4,
     imgCompleta: 'prisma-basepentagonal-inteiro',
     imgMetade: 'metade-prismabasepenta',

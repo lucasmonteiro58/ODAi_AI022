@@ -6,7 +6,7 @@
         <div v-if="image" class="image" :class="image"></div>
         <div class="text-certo" v-html="text"></div>
       </div>
-      <button class="btn-certo" @click.prevent="close">Vamos lá</button>
+      <button class="btn-certo" @click.prevent="close">{{ textBotao }}</button>
       <div class="btn-close icon-fechar" @click.prevent="close"></div>
     </div>
   </div>
@@ -33,6 +33,16 @@ export default {
     image: {
       type: String,
       default: ''
+    },
+    isLast: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    textBotao() {
+      if (this.isLast) return 'Vamos lá'
+      else return 'fechar'
     }
   },
   methods: {

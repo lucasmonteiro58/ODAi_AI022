@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       textAjudas: [
-        '1.Observe a figura ao lado e complete as formas que faltam para completar a sua planificação.',
+        '1. Observe a figura ao lado e pense nas formas que faltam para completar a planificação que aparece no centro da tela.',
         '2. Arraste as formas do painel ao lado para completar a figura no centro. Se precisar apagar, clique na lixeira.',
         '3. Depois, clique em montar para conferir a sua resposta.'
       ]
